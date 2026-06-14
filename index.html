@@ -86,7 +86,6 @@
             font-size: 3.5rem;
             color: var(--primary-color);
             margin-bottom: 10px;
-            cursor: pointer; /* Indique subtilement que c'est cliquable pour toi */
             user-select: none;
         }
 
@@ -195,80 +194,20 @@
         .btn-whatsapp:hover {
             background-color: #1ebd56;
         }
-
-        /* Section Admin Cachée par défaut */
-        #adminSection {
-            display: none;
-            background-color: #fffaf0;
-        }
-
-        .counter-box {
-            background: #fdfbf7;
-            border: 2px dashed var(--primary-color);
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .counter-box h3 {
-            font-size: 1.1rem;
-            color: var(--secondary-color);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .counter-number {
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            display: block;
-            margin-top: 5px;
-        }
-
-        .messages-list {
-            max-height: 250px;
-            overflow-y: auto;
-            margin-top: 15px;
-        }
-
-        .message-card {
-            background: #f9f9f9;
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            border-bottom: 2px solid #eef0f2;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .guest-info {
-            font-weight: 600;
-            color: var(--secondary-color);
-        }
-
-        .guest-status {
-            color: #25D366;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
     </style>
 </head>
 <body>
 
-    <!-- Bloc de retour au site principal -->
     <div class="nav-retour">
-        <a href="https://ton-site-principal.com" class="link-retour">
+        <a href="#" class="link-retour">
             <i class="fa-solid fa-arrow-left"></i> Retour au site
         </a>
     </div>
 
     <div class="container">
         
-        <!-- Cliquer sur le titre H1 ci-dessous ouvrira ton espace d'administration secret -->
         <div class="header-banner">
-            <h1 onclick="toggleAdminPanel()">MR & MRS GNINGUE</h1>
+            <h1>MR & MRS GNINGUE</h1>
             <p>Se disent «Oui»</p>
         </div>
 
@@ -303,13 +242,15 @@
             </button>
         </div>
 
-        <!-- Section de Confirmation simplifiée -->
+        <!-- Section de Confirmation avec liaison automatique Formspree -->
         <div class="section">
             <h2 class="section-title"><i class="fa-solid fa-pen-fancy"></i> Confirmer votre présence</h2>
-            <form id="rsvpForm" onsubmit="ajouterPresence(event)">
+            
+            <!-- ⚠️ REMPLACE UNIQUEMENT LE LIEN CI-DESSOUS PAR TON LIEN FORMSPREE APRES T'ETRE INSCRITE -->
+            <form action="https://formspree.io/f/xlgkazlk" method="POST">
                 <div class="form-group">
                     <label>Votre Nom / Famille</label>
-                    <input type="text" id="guestName" class="form-control" placeholder="Ex: Fatou Diop" required>
+                    <input type="text" name="Nom de l'invite" class="form-control" placeholder="Ex: Fatou Diop" required>
                 </div>
                 <button type="submit" class="btn" style="background-color: var(--primary-color);">
                     <i class="fa-solid fa-check"></i> Confirmer ma venue
@@ -317,35 +258,19 @@
             </form>
         </div>
 
-        <!-- SECTION ADMIN CACHÉE (Visible uniquement quand tu cliques sur le titre principal) -->
-        <div class="section" id="adminSection">
-            <h2 class="section-title" style="color: #c0392b;"><i class="fa-solid fa-lock"></i> Espace Admin Secret</h2>
-            
-            <div class="counter-box">
-                <h3>Total des confirmations</h3>
-                <span class="counter-number" id="totalGuestsCounter">0</span>
-            </div>
-
-            <div class="messages-list" id="presenceContainer"></div>
-        </div>
-
     </div>
 
     <script>
-        // — ⚙️ CONFIGURATION DES INFOS —
         const maries = "Mr & Mrs GNINGUE";
         const dateEtHeure = "Samedi 4 juin 2026";
         const adresse = "Salle Prestige des Almadies, Dakar";
         const urlSite = window.location.href; 
         
-        // -- ENVOI WHATSAPP —
         function partagerWhatsApp() {
             const texte = `✨ *INVITATION DE MARIAGE* ✨\n\nBonjour ! Nous avons le grand bonheur de vous inviter au mariage de *${maries}*.\n\n📅 *Date :* ${dateEtHeure}\n📍 *Lieu :* ${adresse}\n\n⚠️ *IMPORTANT :* Merci de cliquer sur le lien ci-dessous pour confirmer votre présence :\n👉 ${urlSite}`;
-
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(texte)}`, '_blank');
         }
 
-        // — ENVOI AUTRES MESSAGERIES —
         function partagerAutre() {
             const texte = `Invitation au mariage de ${maries}. Rejoignez-nous le ${dateEtHeure} à ${adresse}. Confirmez votre présence ici : ${urlSite}`;
             if (navigator.share) {
@@ -355,66 +280,6 @@
                 alert("Texte d'invitation copié ! Tu peux maintenant le mettre dans ton statut ou le coller en SMS.");
             }
         }
-
-        // — INTERRUPTEUR CACHÉ POUR L'ADMINISTRATEUR —
-        function toggleAdminPanel() {
-            const adminSection = document.getElementById('adminSection');
-            if (adminSection.style.display === 'none' || adminSection.style.display === '') {
-                adminSection.style.display = 'block';
-                // Fait défiler la page automatiquement jusqu'au panneau admin
-                adminSection.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                adminSection.style.display = 'none';
-            }
-        }
-
-        // — GESTION DES CONFIRMATIONS —
-        function afficherPresences() {
-            const container = document.getElementById('presenceContainer');
-            const counterElement = document.getElementById('totalGuestsCounter');
-            
-            // Récupère la liste (démarre vide s'il n'y a rien d'enregistré)
-            let invites = JSON.parse(localStorage.getItem('liste_presences_mariage')) || [];
-            
-            container.innerHTML = '';
-            
-            if(invites.length === 0) {
-                container.innerHTML = '<p style="text-align:center; color:#999; font-style:italic;">Aucune confirmation pour le moment.</p>';
-            }
-
-            invites.forEach(i => {
-                container.innerHTML += `
-                    <div class="message-card">
-                        <span class="guest-info"><i class="fa-solid fa-user-check" style="color: #25D366; margin-right: 8px;"></i> ${i.nom}</span>
-                        <span class="guest-status">Présent <i class="fa-solid fa-circle-check"></i></span>
-                    </div>`;
-            });
-
-            // Le nombre total correspond simplement au nombre d'éléments dans la liste
-            counterElement.innerText = invites.length;
-        }
-
-        function ajouterPresence(e) {
-            e.preventDefault();
-            const nom = document.getElementById('guestName').value.trim();
-
-            let invites = JSON.parse(localStorage.getItem('liste_presences_mariage')) || [];
-            
-            // Ajoute la nouvelle personne en haut de la liste
-            invites.unshift({ nom: nom });
-            localStorage.setItem('liste_presences_mariage', JSON.stringify(invites));
-
-            // Vide le champ du formulaire
-            document.getElementById('guestName').value = '';
-            
-            // Met à jour la liste cachée
-            afficherPresences();
-            
-            alert("Merci ! Votre présence a bien été confirmée.");
-        }
-
-        // Charger les données dès l'ouverture de la page
-        window.onload = afficherPresences;
     </script>
 </body>
 </html>
