@@ -11,13 +11,13 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Couleurs Thème */
+        /* Couleurs Thème Adaptées (Parfait pour des tenues blanches et or) */
         :root {
             --primary-color: #d4af37; /* Couleur Or doré */
-            --secondary-color: #2c3e50; /* Bleu nuit élégant */
-            --background-color: #84b5f5; /* Fond bleu doux */
+            --secondary-color: #1a2a3a; /* Bleu royal profond, très élégant */
+            --background-color: #f7f9fa; /* Fond clair épuré et moderne */
             --card-bg: #ffffff;
-  -          --text-color: #4a4a4a;
+            --text-color: #4a4a4a;
         }
 
         * {
@@ -72,12 +72,12 @@
             overflow: hidden;
         }
         
-        /* Bannière d’accueil photo */
+        /* Bannière d’accueil photo - Cadrage ajusté sur le haut (top center) */
         .header-banner {
-            background: linear-gradient(rgba(44, 62, 80, 0.4), rgba(44, 62, 80, 0.6)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800') center/cover;
+            background: linear-gradient(rgba(26, 42, 58, 0.3), rgba(26, 42, 58, 0.5)), url('astou.png') top center/cover;
             color: white;
             text-align: center;
-            padding: 60px 20px;
+            padding: 110px 20px; /* Légèrement augmenté pour donner de l'espace aux visages */
             border-bottom: 4px solid var(--primary-color);
         }
 
@@ -87,6 +87,7 @@
             color: var(--primary-color);
             margin-bottom: 10px;
             user-select: none;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
         }
 
         .header-banner p {
@@ -94,6 +95,7 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 300;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
         }
 
         /* Style des sections */
@@ -185,6 +187,11 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2c3e50;
         }
 
         .btn-whatsapp {
@@ -198,31 +205,32 @@
 </head>
 <body>
 
-   
     <div class="container">
         
         <div class="header-banner">
             <h1>MR & MRS GNINGUE</h1>
             <p>Se disent «Oui»</p>
         </div>
-<div class="invitation-text" style="text-align:center;padding: 40px 20px; 
-    background-color: #ffffff;
-    border-top: 3px solid #d4af37; /* Ligne dorée supérieure */
-    border-bottom: 3px solid #d4af37; /* Ligne dorée inférieure */
-    position: relative;
-    background-image: url('https://w0.peakpx.com/wallpaper/409/987/HD-wallpaper-gold-leaf-botanical-art-leaves-minimal-abstract-geometric-plants-minimalism-lines-pattern-texture-elegant-thumbnail.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;">
-    <p style="
-        font-family: 'Alex Brush', cursive; 
-        font-size: 2.2rem; 
-        color: #c59b27; /* Teinte dorée texturée */
-        margin: 0; 
-        line-height: 1.4;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-    ">Nous avons le plaisir de vous inviter à la célébration de notre union et à partager ce moment de bonheur avec nous.</p>
-</div>
+
+        <div class="invitation-text" style="text-align:center;padding: 40px 20px; 
+            background-color: #ffffff;
+            border-top: 3px solid #d4af37; /* Ligne dorée supérieure */
+            border-bottom: 3px solid #d4af37; /* Ligne dorée inférieure */
+            position: relative;
+            background-image: url('https://w0.peakpx.com/wallpaper/409/987/HD-wallpaper-gold-leaf-botanical-art-leaves-minimal-abstract-geometric-plants-minimalism-lines-pattern-texture-elegant-thumbnail.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;">
+            <p style="
+                font-family: 'Alex Brush', cursive; 
+                font-size: 2.2rem; 
+                color: #c59b27; /* Teinte dorée texturée */
+                margin: 0; 
+                line-height: 1.4;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+            ">Nous avons le plaisir de vous inviter à la célébration de notre union et à partager ce moment de bonheur avec nous.</p>
+        </div>
+
         <div class="section">
             <h2 class="section-title"><i class="fa-solid fa-calendar-days"></i> Programme</h2>
             <div class="detail-item">
@@ -250,15 +258,13 @@
                 <i class="fa-brands fa-whatsapp"></i> Partager sur WhatsApp
             </button>
             <button class="btn" onclick="partagerAutre()">
-                <i9999/8888888 class="fa-solid fa-message"></i> Copier le texte (SMS / Autre)
+                <i class="fa-solid fa-message"></i> Copier le texte (SMS / Autre)
             </button>
         </div>
 
-        <!-- Section de Confirmation avec liaison automatique Formspree -->
         <div class="section">
             <h2 class="section-title"><i class="fa-solid fa-pen-fancy"></i> Confirmer votre présence</h2>
             
-            <!-- ⚠️ REMPLACE UNIQUEMENT LE LIEN CI-DESSOUS PAR TON LIEN FORMSPREE APRES T'ETRE INSCRITE -->
             <form action="https://formspree.io/f/xlgkazlk" method="POST">
                 <div class="form-group">
                     <label>Votre Nom / Famille</label>
@@ -279,16 +285,16 @@
         const urlSite = window.location.href; 
         
         function partagerWhatsApp() {
-            const texte = `✨ *INVITATION DE MARIAGE* ✨\n\nBonjour ! Nous avons le grand bonheur de vous inviter au mariage de *${maries}*.\n\n📅 *Date :* ${dateEtHeure}\n📍 *Lieu :* ${adresse}\n\n⚠️ *IMPORTANT :* Merci de cliquer sur le lien ci-dessous pour confirmer votre présence :\n👉 ${urlSite}`;
-            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(texte)}`, '_blank');
+            const text = `✨ *INVITATION DE MARIAGE* ✨\n\nBonjour ! Nous avons le grand bonheur de vous inviter au mariage de *${maries}*.\n\n📅 *Date :* ${dateEtHeure}\n📍 *Lieu :* ${adresse}\n\n⚠️ *IMPORTANT :* Merci de cliquer sur le lien ci-dessous pour confirmer votre présence :\n👉 ${urlSite}`;
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
         }
 
         function partagerAutre() {
-            const texte = `Invitation au mariage de ${maries}. Rejoignez-nous le ${dateEtHeure} à ${adresse}. Confirmez votre présence ici : ${urlSite}`;
+            const text = `Invitation au mariage de ${maries}. Rejoignez-nous le ${dateEtHeure} à ${adresse}. Confirmez votre présence ici : ${urlSite}`;
             if (navigator.share) {
-                navigator.share({ title: "Invitation Mariage", text: texte, url: urlSite });
+                navigator.share({ title: "Invitation Mariage", text: text, url: urlSite });
             } else {
-                navigator.clipboard.writeText(texte);
+                navigator.clipboard.writeText(text);
                 alert("Texte d'invitation copié ! Tu peux maintenant le mettre dans ton statut ou le coller en SMS.");
             }
         }
