@@ -11,11 +11,11 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Couleurs Thème Adaptées (Parfait pour des tenues blanches et or) */
+        /* Couleurs Thème */
         :root {
             --primary-color: #d4af37; /* Couleur Or doré */
-            --secondary-color: #1a2a3a; /* Bleu royal profond, très élégant */
-            --background-color: #f7f9fa; /* Fond clair épuré et moderne */
+            --secondary-color: #2c3e50; /* Bleu nuit élégant */
+            --background-color: #f7f9fa; /* Fond clair épuré */
             --card-bg: #ffffff;
             --text-color: #4a4a4a;
         }
@@ -34,34 +34,6 @@
             padding: 10px;
         }
 
-        /* --- Style du Bouton de Retour Principal --- */
-        .nav-retour {
-            max-width: 600px;
-            margin: 10px auto 0 auto;
-            display: flex;
-        }
-
-        .link-retour {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: white;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background-color: rgba(44, 62, 80, 0.4);
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .link-retour:hover {
-            background-color: var(--secondary-color);
-            transform: translateX(-3px);
-        }
-
         /* Boîte principale de l’invitation */
         .container {
             max-width: 600px;
@@ -77,7 +49,7 @@
             background: linear-gradient(rgba(26, 42, 58, 0.3), rgba(26, 42, 58, 0.5)), url('astou.png') top center/cover;
             color: white;
             text-align: center;
-            padding: 110px 20px; /* Légèrement augmenté pour donner de l'espace aux visages */
+            padding: 110px 20px;
             border-bottom: 4px solid var(--primary-color);
         }
 
@@ -148,25 +120,19 @@
             color: var(--secondary-color);
         }
 
-        /* Formulaire de saisie */
-        .form-group {
-            margin-bottom: 15px;
+        /* NOUVEAU : Style pour le lien de localisation */
+        .maps-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s ease;
         }
 
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-family: inherit;
-            font-size: 1rem;
+        .maps-link:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
         }
 
         /* Boutons d’action */
@@ -212,25 +178,6 @@
             <p>Se disent «Oui»</p>
         </div>
 
-        <div class="invitation-text" style="text-align:center;padding: 40px 20px; 
-            background-color: #ffffff;
-            border-top: 3px solid #d4af37; /* Ligne dorée supérieure */
-            border-bottom: 3px solid #d4af37; /* Ligne dorée inférieure */
-            position: relative;
-            background-image: url('https://w0.peakpx.com/wallpaper/409/987/HD-wallpaper-gold-leaf-botanical-art-leaves-minimal-abstract-geometric-plants-minimalism-lines-pattern-texture-elegant-thumbnail.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;">
-            <p style="
-                font-family: 'Alex Brush', cursive; 
-                font-size: 2.2rem; 
-                color: #c59b27; /* Teinte dorée texturée */
-                margin: 0; 
-                line-height: 1.4;
-                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-            ">Nous avons le plaisir de vous inviter à la célébration de notre union et à partager ce moment de bonheur avec nous.</p>
-        </div>
-
         <div class="section">
             <h2 class="section-title"><i class="fa-solid fa-calendar-days"></i> Programme</h2>
             <div class="detail-item">
@@ -244,7 +191,13 @@
                 <i class="fa-solid fa-location-dot"></i>
                 <div class="detail-text">
                     <h4>Lieu de la Réception</h4>
-                    <p>Grand-Dakar,Rue derneville,Dakar</p>
+                    <!-- MODIFICATION ICI : Remplacer l'adresse par un lien -->
+                    <p>
+                        <a href="COPIER_VOTRE_LIEN_GOOGLE_MAPS_ICI" target="_blank" rel="noopener noreferrer" class="maps-link">
+                            Grand-Dakar, Rue derneville, Dakar
+                            <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.7rem;"></i>
+                        </a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -256,9 +209,6 @@
             </p>
             <button class="btn btn-whatsapp" onclick="partagerWhatsApp()">
                 <i class="fa-brands fa-whatsapp"></i> Partager sur WhatsApp
-            </button>
-            <button class="btn" onclick="partagerAutre()">
-                <i class="fa-solid fa-message"></i> Copier le texte (SMS / Autre)
             </button>
         </div>
 
@@ -287,16 +237,6 @@
         function partagerWhatsApp() {
             const text = `✨ *INVITATION DE MARIAGE* ✨\n\nBonjour ! Nous avons le grand bonheur de vous inviter au mariage de *${maries}*.\n\n📅 *Date :* ${dateEtHeure}\n📍 *Lieu :* ${adresse}\n\n⚠️ *IMPORTANT :* Merci de cliquer sur le lien ci-dessous pour confirmer votre présence :\n👉 ${urlSite}`;
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
-        }
-
-        function partagerAutre() {
-            const text = `Invitation au mariage de ${maries}. Rejoignez-nous le ${dateEtHeure} à ${adresse}. Confirmez votre présence ici : ${urlSite}`;
-            if (navigator.share) {
-                navigator.share({ title: "Invitation Mariage", text: text, url: urlSite });
-            } else {
-                navigator.clipboard.writeText(text);
-                alert("Texte d'invitation copié ! Tu peux maintenant le mettre dans ton statut ou le coller en SMS.");
-            }
         }
     </script>
 </body>
